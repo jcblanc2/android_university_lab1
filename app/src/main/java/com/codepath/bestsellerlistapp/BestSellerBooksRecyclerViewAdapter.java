@@ -1,12 +1,16 @@
 package com.codepath.bestsellerlistapp;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.codepath.bestsellerlistapp.models.BestSellerBook;
 
 import java.util.List;
@@ -19,6 +23,7 @@ public class BestSellerBooksRecyclerViewAdapter extends RecyclerView.Adapter<Bes
 
     private final List<BestSellerBook> books;
     private final OnListFragmentInteractionListener mListener;
+    Context context;
 
     public BestSellerBooksRecyclerViewAdapter(List<BestSellerBook> items, OnListFragmentInteractionListener listener) {
         books = items;
@@ -35,8 +40,23 @@ public class BestSellerBooksRecyclerViewAdapter extends RecyclerView.Adapter<Bes
     @Override
     public void onBindViewHolder(final BookViewHolder holder, int position) {
         holder.mItem = books.get(position);
+        BestSellerBook bestSellerBook = books.get(position);
+
+        String ranking = String.format("%d", bestSellerBook.rank);
+        holder.mRanking.setText(ranking);
+
+        Glide.with(holder.mView)
+                .load(bestSellerBook.bookImageUrl)
+                .override(400,500)
+                .into(holder.mBookImage);
+
         holder.mBookTitle.setText(books.get(position).title);
         holder.mBookAuthor.setText(books.get(position).author);
+        holder.mDescription.setText(books.get(position).description);
+//        holder.mButton.setText(books.get(position).amazonUrl);
+
+
+
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,12 +80,20 @@ public class BestSellerBooksRecyclerViewAdapter extends RecyclerView.Adapter<Bes
         public final TextView mBookTitle;
         public final TextView mBookAuthor;
         public BestSellerBook mItem;
+        public final ImageView mBookImage;
+        public final TextView mDescription;
+        public final TextView mRanking;
+//        public final Button mButton;
 
         public BookViewHolder(View view) {
             super(view);
             mView = view;
+            mRanking = (TextView) view.findViewById(R.id.ranking);
+            mBookImage = (ImageView) view.findViewById(R.id.book_image);
             mBookTitle = (TextView) view.findViewById(R.id.book_title);
             mBookAuthor = (TextView) view.findViewById(R.id.book_author);
+            mDescription = (TextView) view.findViewById(R.id.book_description);
+//            mButton = (Button) view.findViewById(R.id.buy_button);
         }
 
         @Override
