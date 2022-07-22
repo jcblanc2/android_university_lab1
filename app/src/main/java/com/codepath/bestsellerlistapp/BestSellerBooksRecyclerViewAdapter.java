@@ -53,7 +53,6 @@ public class BestSellerBooksRecyclerViewAdapter extends RecyclerView.Adapter<Bes
         holder.mBookTitle.setText(books.get(position).title);
         holder.mBookAuthor.setText(books.get(position).author);
         holder.mDescription.setText(books.get(position).description);
-//        holder.mButton.setText(books.get(position).amazonUrl);
 
 
 
@@ -83,7 +82,6 @@ public class BestSellerBooksRecyclerViewAdapter extends RecyclerView.Adapter<Bes
         public final ImageView mBookImage;
         public final TextView mDescription;
         public final TextView mRanking;
-//        public final Button mButton;
 
         public BookViewHolder(View view) {
             super(view);
@@ -93,7 +91,6 @@ public class BestSellerBooksRecyclerViewAdapter extends RecyclerView.Adapter<Bes
             mBookTitle = (TextView) view.findViewById(R.id.book_title);
             mBookAuthor = (TextView) view.findViewById(R.id.book_author);
             mDescription = (TextView) view.findViewById(R.id.book_description);
-//            mButton = (Button) view.findViewById(R.id.buy_button);
         }
 
         @Override
